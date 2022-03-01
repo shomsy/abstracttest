@@ -46,7 +46,7 @@
 
                         <div class="card-footer ">
                             <a
-                                href="#"
+                                href="{{ route('github.signup') }}"
                                 class="btn btn-primary btn-round btn-lg btn-block mb-3"
                             >
                                 <span class="btn-inner--icon">

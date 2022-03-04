@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('auth/github', [GitHubAuthController::class, 'gitRedirect'])->name('github.signup');
 Route::get('auth/github/callback', [GitHubAuthController::class, 'gitCallback']);
+Route::get('auth/github/logout', [GitHubAuthController::class, 'logout'])->name('github.logout');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

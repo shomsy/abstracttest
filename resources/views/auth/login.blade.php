@@ -1,10 +1,10 @@
 @extends('layouts.app',
-    [
-        'namePage' => 'Login page',
-        'class' => 'login-page sidebar-mini ',
-        'activePage' => 'login',
-        'backgroundImage' => asset('assets') . "/img/bg14.jpg",
-    ]
+[
+'namePage' => 'Login page',
+'class' => 'login-page sidebar-mini ',
+'activePage' => 'login',
+'backgroundImage' => asset('assets') . "/img/bg14.jpg",
+]
 )
 
 @section('content')

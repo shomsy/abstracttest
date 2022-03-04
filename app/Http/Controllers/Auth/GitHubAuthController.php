@@ -66,6 +66,8 @@ class GitHubAuthController extends Controller
             ]
         );
 
+        Auth::login($user);
+
         event(new Registered($user));
 
         return redirect('/home');

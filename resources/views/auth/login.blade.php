@@ -64,12 +64,15 @@
 @endsection
 
 @push('js')
-    <script>
+    <script
+        type="application/javascript"
         $(document)
-            .ready(
-                function() {
-                    demo
-                        .checkFullPageBackgroundImage();
-                });
-    </script>
-@endpush
+        .ready(
+        function()
+        {
+        demo
+        .checkFullPageBackgroundImage();
+        });
+        </script
+    >
+    @endpush

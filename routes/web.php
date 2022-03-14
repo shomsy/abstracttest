@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GitHubAuthController;
+use App\Http\Controllers\GitRepositoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,19 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+    Route::get('repositories', [GitRepositoryController::class, 'index']);
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
 });
 
 Route::get('auth/github', [GitHubAuthController::class, 'gitRedirect'])->name('github.signup');
 Route::get('auth/github/callback', [GitHubAuthController::class, 'gitCallback']);
 Route::get('auth/github/logout', [GitHubAuthController::class, 'logout'])->name('github.logout');
-
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');

@@ -29,9 +29,9 @@ class GitHubAuthController extends Controller
 
 
     /**
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function gitCallback()
+    public function gitCallback(): Redirector|RedirectResponse|Application
     {
         try {
             $fetchedUser = Socialite::driver('github')->user();

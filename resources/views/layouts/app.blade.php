@@ -90,6 +90,11 @@
     <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
     <script src="{{ asset('assets') }}/demo/demo.js">
     </script>
+    <script
+        type="text/javascript"
+        src="{{ asset('js/app.js') }}"
+    ></script>
+
     @stack('js')
 </body>
 

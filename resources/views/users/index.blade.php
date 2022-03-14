@@ -144,7 +144,7 @@
         rel="stylesheet"
     />
     <!-- Google Tag Manager -->
-    <script>
+    <script type="application/javascript">
         (function(w, d,
             s, l, i
         ) {
@@ -194,7 +194,7 @@
         );
     </script>
     <!-- End Google Tag Manager -->
-    <script>
+    <script type="application/javascript">
         // Facebook Pixel Code Don't Delete
         ! function(f, b,
             e, v, n, t,
@@ -802,7 +802,7 @@
                         id="copyright"
                     >
                         ©
-                        <script>
+                        <script type="application/javascript">
                             document
                                 .getElementById(
                                     'copyright'

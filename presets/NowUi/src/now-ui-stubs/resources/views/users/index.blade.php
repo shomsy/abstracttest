@@ -393,15 +393,6 @@
         </li>
       </ul>
     </nav>
-    <div class="copyright" id="copyright">
-      ©
-      <script>
-        document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-      </script>2020,  Designed by
-      <a href="https://www.invisionapp.com" target="_blank"> Invision</a> . Coded by
-      <a href="https://www.creative-tim.com" target="_blank"> Creative Tim </a>&amp;
-      <a href="https://www.updivision.com" target="_blank"> Updivision</a>
-    </div>
   </div>
 </footer></div>                    </div>
   <!--   Core JS Files   -->

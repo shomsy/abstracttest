@@ -33,7 +33,7 @@
 @endsection
 
 @push('js')
-    <script>
+    <script type="application/javascript">
         $(document)
             .ready(
                 function() {

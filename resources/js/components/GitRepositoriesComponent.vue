@@ -21,7 +21,7 @@
         >
           <td>
             <i
-                class="now-ui-icons p-2"
+                class="now-ui-icons p-2 font-weight-bolder"
                 :class="[ opened.includes(repository.id) ? 'ui-1_simple-delete' : 'ui-1_simple-add'  ]"
             ></i>
             {{ repository.name }}

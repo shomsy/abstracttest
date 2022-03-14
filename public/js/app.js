@@ -49759,7 +49759,7 @@ var render = function () {
               [
                 _c("td", [
                   _c("i", {
-                    staticClass: "now-ui-icons p-2",
+                    staticClass: "now-ui-icons p-2 font-weight-bolder",
                     class: [
                       _vm.opened.includes(repository.id)
                         ? "ui-1_simple-delete"

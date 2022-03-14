@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use JetBrains\PhpStorm\ArrayShape;
 
 class ProfileRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class ProfileRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return auth()->check();
     }
@@ -23,12 +24,12 @@ class ProfileRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    #[ArrayShape(['name' => "string[]", 'company' => "string[]"])]
+    public function rules(): array
     {
         return [
             'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            'photo' => ['nullable', 'image'],
+            'company' => ['required', 'min:3'],
         ];
     }
 }

@@ -37,6 +37,10 @@ class GitHubAuthController extends Controller
             $fetchedUser = Socialite::driver('github')->user();
 
             if ($gitUser = User::where('github_id', $fetchedUser->id)->first()) {
+                if ($fetchedUser->token !== $gitUser->gitHubToken) {
+                 $gitUser->update(['github_token' => $fetchedUser->token]);
+                }
+
                 return $this->login($gitUser);
             }
 
@@ -62,7 +66,9 @@ class GitHubAuthController extends Controller
                 'email' => $authUser->email,
                 'github_id' => $authUser->id,
                 'company' => $authUser->user['company'],
-                'password' => $authUser->token
+                'password' => $authUser->token,
+                'github_token' => $authUser->token,
+                'github_avatar' => $authUser->getAvatar(),
             ]
         );
 

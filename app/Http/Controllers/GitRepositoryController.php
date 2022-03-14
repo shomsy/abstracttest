@@ -17,7 +17,7 @@ class GitRepositoryController extends Controller
     {
         // TODO: get token from DB
         $gitUser = Socialite::driver('github')
-            ->userFromToken('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');
+            ->userFromToken(auth()->user()->github_token);
 
         $getGitUserRepositories = Http::get($gitUser['repos_url'])->body();
 

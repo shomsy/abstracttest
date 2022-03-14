@@ -33,21 +33,8 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request): RedirectResponse
     {
-        auth()->user()->update($request->all());
+        auth()->user()->update($request->validated());
 
         return back()->withStatus(__('Profile successfully updated.'));
-    }
-
-    /**
-     * Change the password
-     *
-     * @param  \App\Http\Requests\PasswordRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function password(PasswordRequest $request): RedirectResponse
-    {
-        auth()->user()->update(['password' => Hash::make($request->get('password'))]);
-
-        return back()->withPasswordStatus(__('Password successfully updated.'));
     }
 }

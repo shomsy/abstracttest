@@ -22,7 +22,7 @@ asset('assets') .
                             <div class="row justify-content-center">
                                 <div class="col-lg-12 col-md-9">
                                     <h3 class="text-white">
-                                        {{ __('Welcome to Now Ui Dashboard Free Laravel Live Preview.') }}
+                                        Abstract Test Project
                                     </h3>
                                     <p class="text-lead text-light mt-3 mb-0">
                                         @include('alerts.migrations_check')

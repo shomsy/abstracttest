@@ -1,12 +1,12 @@
 @component('mail::message')
-    # Hello {{ $user->name }},
+# Hello {{ $user->name }},
 
-    Welcome to our awesome application. Be free to explore.
+Welcome to our awesome application. Be free to explore.
 
-    @component('mail::button', ['url' => '/'])
-        Explore
-    @endcomponent
+@component('mail::button', ['url' => '/'])
+    Explore
+@endcomponent
 
-    Thanks,<br>
+Thanks,<br>
     {{ config('app.name') }}
 @endcomponent

@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="panel-header panel-header-sm"></div>
-    <div class="content">
+    @include('alerts.success')
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

@@ -1,11 +1,10 @@
 @extends('layouts.app',
 [
-'namePage' => 'Table
-List',
+'namePage' => 'Repositories',
 'class' =>
 'sidebar-mini',
 'activePage' =>
-'table',
+'repositories',
 ])
 
 @section('content')
@@ -20,20 +19,14 @@ List',
                         </h4>
                     </div>
                     <div class="card-body">
-                        <git-repositories-component
-                                :repositories="{{ json_encode($gitRepositories) }}"
-                        >
+                        <git-repositories-component :repositories="{{ json_encode($gitRepositories->all()) }}">
                         </git-repositories-component>
+                        <div class="d-flex justify-content-center">
+                            {!! $gitRepositories->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-<script>
-import GitRepositoriesComponent from "../../js/components/GitRepositoriesComponent";
-
-export default {
-    components: {GitRepositoriesComponent}
-}
-</script>

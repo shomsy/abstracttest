@@ -8,7 +8,7 @@
 </form>
 @include('layouts.navbars.sidebar')
 <div
-    class="main-panel"
+    class="main-panel ms"
     id="app"
 >
     @include('layouts.navbars.navs.auth')

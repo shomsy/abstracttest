@@ -76,7 +76,7 @@ class GitHubAuthController extends Controller
 
         event(new Registered($user));
 
-        return redirect('/home');
+        return redirect('/profile');
     }
 
     /**
@@ -93,7 +93,7 @@ class GitHubAuthController extends Controller
 
         event(new CheckIdentity($user, $userIp, $locationData));
 
-        return redirect('/home');
+        return redirect('/profile');
     }
 
     /**

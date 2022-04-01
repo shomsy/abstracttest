@@ -25,12 +25,16 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-    Route::get('repositories', [GitRepositoryController::class, 'index']);
-	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
+    Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+    Route::put(
+        'profile/password',
+        ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']
+    );
+    Route::get('repositories', [GitRepositoryController::class, 'index'])->name('repos');
+    Route::get('repos/{owner}/{repo}/commits', [GitRepositoryController::class, 'commits'])->name('commits');
+    Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
 });
 
 Route::get('auth/github', [GitHubAuthController::class, 'gitRedirect'])->name('github.signup');

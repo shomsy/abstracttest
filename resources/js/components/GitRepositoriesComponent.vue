@@ -13,10 +13,7 @@
           :key="repository.id"
       >
         <tr
-            @click="toggle(repository.id, repository.commits_url)"
             :class="{ opened: opened.includes(repository.id) }"
-            data-toggle="collapse"
-            data-target="#demo1"
             class="accordion-toggle"
         >
           <td>
@@ -24,7 +21,12 @@
                 class="now-ui-icons p-2 font-weight-bolder"
                 :class="[ opened.includes(repository.id) ? 'ui-1_simple-delete' : 'ui-1_simple-add'  ]"
             ></i>
-            {{ repository.name }}
+            <a
+                :href="`repos/${repository.owner['login']}/${repository.name}/commits`"
+                class="stretched-link"
+            >
+              {{ repository.name }}
+            </a>
           </td>
 
           <td>

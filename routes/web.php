@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\GitHubAuthController;
-use App\Http\Controllers\GitRepositoryController;
+use App\Http\Controllers\GitCommitsController;
+use App\Http\Controllers\GitRepositoriesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,15 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], static function () {
     Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -32,9 +27,11 @@ Route::group(['middleware' => 'auth'], function () {
         'profile/password',
         ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']
     );
-    Route::get('repositories', [GitRepositoryController::class, 'index'])->name('repos');
-    Route::get('repos/{owner}/{repo}/commits', [GitRepositoryController::class, 'commits'])->name('commits');
-    Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
+    Route::get('repositories', [GitRepositoriesController::class, '__invoke'])->name('repos');
+    Route::get('repos/{owner}/{repo}/commits', [GitCommitsController::class, '__invoke'])->name('commits');
+    Route::fallback(static function () {
+       return redirect('/profile');
+    });
 });
 
 Route::get('auth/github', [GitHubAuthController::class, 'gitRedirect'])->name('github.signup');

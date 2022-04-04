@@ -20,16 +20,15 @@ use Stevebauman\Location\Facades\Location;
 class GitHubAuthController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Illuminate\Http\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|RedirectResponse
      */
     public function gitRedirect(): \Symfony\Component\HttpFoundation\RedirectResponse|RedirectResponse
     {
         return Socialite::driver('github')->redirect();
     }
 
-
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Redirector|RedirectResponse|Application
      */
     public function gitCallback(): Redirector|RedirectResponse|Application
     {
@@ -52,11 +51,10 @@ class GitHubAuthController extends Controller
         }
     }
 
-
     /**
      * @param  \Laravel\Socialite\Contracts\User  $authUser
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Redirector
      */
     private function register(\Laravel\Socialite\Contracts\User $authUser): Redirector|RedirectResponse|Application
     {
@@ -80,9 +78,9 @@ class GitHubAuthController extends Controller
     }
 
     /**
-     * @param  \App\Models\User  $user
+     * @param User $user
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Redirector
      */
     private function login(User $user): Redirector|RedirectResponse|Application
     {
@@ -97,7 +95,7 @@ class GitHubAuthController extends Controller
     }
 
     /**
-     * @return \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+     * @return Redirector|Application|RedirectResponse
      */
     public function logout(): Redirector|Application|RedirectResponse
     {

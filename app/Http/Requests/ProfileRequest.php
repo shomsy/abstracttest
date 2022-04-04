@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use JetBrains\PhpStorm\ArrayShape;
 
 class ProfileRequest extends FormRequest
 {
@@ -24,12 +21,11 @@ class ProfileRequest extends FormRequest
      *
      * @return array
      */
-    #[ArrayShape(['name' => "string[]", 'company' => "string[]"])]
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:3'],
-            'company' => ['required', 'min:3'],
+            'name' => ['required', 'string', 'min:3'],
+            'company' => ['required', 'string', 'min:3'],
         ];
     }
 }

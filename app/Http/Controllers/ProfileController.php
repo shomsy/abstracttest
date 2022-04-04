@@ -18,7 +18,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the profile.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(): View
     {
@@ -28,8 +28,8 @@ class ProfileController extends Controller
     /**
      * Update the profile
      *
-     * @param  \App\Http\Requests\ProfileRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param ProfileRequest $request
+     * @return RedirectResponse
      */
     public function update(ProfileRequest $request): RedirectResponse
     {

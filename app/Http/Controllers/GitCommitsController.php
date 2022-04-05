@@ -14,13 +14,12 @@ class GitCommitsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param Request $request
      * @param string $owner
      * @param string $repo
      * @return View|Factory|Application
      * @throws RequestException
      */
-    public function __invoke(Request $request, string $owner, string $repo): View|Factory|Application
+    public function __invoke(string $owner, string $repo): View|Factory|Application
     {
         $getRepositoryCommits = Http::get("https://api.github.com/repos/$owner/$repo/commits")->throw()->object();
 

@@ -16,11 +16,10 @@ class GitRepositoriesController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param Request $request
      * @return Application|Factory|View
      * @throws RequestException
      */
-    public function __invoke(Request $request): View|Factory|Application
+    public function __invoke(): View|Factory|Application
     {
         $gitUser = Socialite::driver('github')
             ->userFromToken(auth()->user()->github_token);

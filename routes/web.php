@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], static function () {
     Route::get('repositories', [GitRepositoriesController::class, '__invoke'])->name('repos');
     Route::get('repos/{owner}/{repo}/commits', [GitCommitsController::class, '__invoke'])->name('commits');
     Route::fallback(static function () {
-       return redirect('/profile');
+        return redirect('/profile');
     });
 });
 

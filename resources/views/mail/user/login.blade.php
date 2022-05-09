@@ -7,7 +7,7 @@
     'headline' => 'Do you recognize this activity?',
     'buttons' => [
         [
-            'url' => route('home'),
+            'url' => route('profile.edit'),
             'slot' => 'Yes, it was me',
         ],
         [

@@ -89,7 +89,7 @@ Profile',
                             <a href="#">
                                 <img
                                         class="avatar border-gray"
-                                        src="{{ auth()->user()->github_avatar ?? asset('assets') . '/img/default-avatar.png' }}"
+                                        src="{{ auth()->user()->github_avatar }}"
                                         alt="..."
                                 >
                                 <h5 class="title">

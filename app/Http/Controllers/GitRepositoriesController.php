@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Client\RequestException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Laravel\Socialite\Facades\Socialite;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class GitRepositoriesController extends Controller
 {
@@ -18,13 +17,17 @@ class GitRepositoriesController extends Controller
      *
      * @return Application|Factory|View
      * @throws RequestException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function __invoke(): View|Factory|Application
     {
-        $gitUser = Socialite::driver('github')
-            ->userFromToken(auth()->user()->github_token);
+        $gitUser = session()->get('OAuth');
 
-        $getGitUserRepositories = Http::get($gitUser['repos_url'])->throw()->object();
+        $getGitUserRepositories = [];
+        if (isset($gitUser->user['repos_url'])) {
+            $getGitUserRepositories = Http::get($gitUser->user['repos_url'])->throw()->object();
+        }
 
         $paginatedData = collect($getGitUserRepositories)->simplePaginate(5);
 

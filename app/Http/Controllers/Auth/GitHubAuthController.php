@@ -1,5 +1,4 @@
 <?php
-/** @noinspection DuplicatedCode */
 
 namespace App\Http\Controllers\Auth;
 
@@ -12,13 +11,13 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Routing\Redirector;
 use App\Models\User;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Stevebauman\Location\Facades\Location;
 
 class GitHubAuthController extends Controller
 {
+
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|RedirectResponse
      */
@@ -34,10 +33,11 @@ class GitHubAuthController extends Controller
     {
         try {
             $fetchedUser = Socialite::driver('github')->user();
+            session()->put('OAuth', $fetchedUser);
 
             if ($gitUser = User::where('github_id', $fetchedUser->id)->first()) {
                 if ($fetchedUser->token !== $gitUser->gitHubToken) {
-                 $gitUser->update(['github_token' => $fetchedUser->token]);
+                    $gitUser->update(['github_token' => $fetchedUser->token]);
                 }
 
                 return $this->login($gitUser);
@@ -52,7 +52,7 @@ class GitHubAuthController extends Controller
     }
 
     /**
-     * @param  \Laravel\Socialite\Contracts\User  $authUser
+     * @param \Laravel\Socialite\Contracts\User $authUser
      *
      * @return Application|RedirectResponse|Redirector
      */
@@ -60,13 +60,13 @@ class GitHubAuthController extends Controller
     {
         $user = User::create(
             [
-                'name' => $authUser->name,
-                'email' => $authUser->email,
+                'name' => $authUser->name ?? 'N/A',
+                'email' => $authUser->email ?? 'N/A',
                 'github_id' => $authUser->id,
-                'company' => $authUser->user['company'],
+                'company' => optional($authUser->user)['company'] ?? 'N/A',
                 'password' => $authUser->token,
                 'github_token' => $authUser->token,
-                'github_avatar' => $authUser->getAvatar(),
+                'github_avatar' => $authUser->getAvatar() ?? 'https://i.pravatar.cc/150?img=3',
             ]
         );
 
@@ -99,6 +99,8 @@ class GitHubAuthController extends Controller
      */
     public function logout(): Redirector|Application|RedirectResponse
     {
+        Session::flush();
+
         Auth::logout();
 
         return redirect('/');
